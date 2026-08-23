@@ -778,6 +778,287 @@
                 display: none;
             }
         }
+        /* =========================================
+   📱 MOBILE OPTIMIZATION
+   ========================================= */
+        
+        @media (max-width: 600px) {
+            body {
+                overflow-x: hidden;
+            }
+            .wrap {
+                width: 100%;
+                padding: 10px;
+            }
+            header {
+                margin: 8px 0 18px;
+            }
+            h1 {
+                font-size: clamp(2.2rem, 12vw, 3.5rem);
+                letter-spacing: -2px;
+            }
+            header p {
+                font-size: 0.9rem;
+                margin-top: 8px;
+            }
+            /* Main layout */
+            .layout {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+            }
+            /* Board panel */
+            .board-panel {
+                width: 100%;
+                padding: 8px;
+                border-radius: 18px;
+            }
+            #board {
+                width: 100%;
+                max-width: 100%;
+                aspect-ratio: 1;
+                border-radius: 14px;
+                border-width: 2px;
+            }
+            /* Board cells */
+            .cell {
+                padding: 3px;
+                font-size: clamp(7px, 2.4vw, 11px);
+            }
+            .num {
+                font-size: 0.75em;
+            }
+            .cell-icon {
+                font-size: clamp(8px, 2.5vw, 14px);
+                bottom: 1px;
+                right: 1px;
+            }
+            /* Player pieces */
+            .piece {
+                width: clamp(17px, 5vw, 23px);
+                height: clamp(17px, 5vw, 23px);
+                font-size: 8px;
+                border-width: 2px;
+                right: 2px;
+                top: 2px;
+            }
+            .piece.active {
+                transform: scale(1.15);
+            }
+            /* Legend */
+            .legend {
+                gap: 8px;
+                margin-top: 8px;
+            }
+            .legend-item {
+                font-size: 0.68rem;
+                gap: 4px;
+            }
+            .legend-dot {
+                width: 8px;
+                height: 8px;
+            }
+            /* Controls */
+            .controls {
+                width: 100%;
+                max-width: none;
+                padding: 14px;
+                border-radius: 18px;
+            }
+            .turn {
+                padding: 12px;
+                border-radius: 15px;
+                margin-bottom: 8px;
+            }
+            .turn small {
+                font-size: 0.65rem;
+            }
+            .turn strong {
+                font-size: 1.25rem;
+                margin-top: 3px;
+            }
+            /* Dice */
+            .dice-container {
+                height: 70px;
+                margin: 5px 0;
+            }
+            .dice {
+                font-size: 3.5rem;
+            }
+            /* Buttons */
+            button {
+                min-height: 52px;
+                padding: 14px 16px;
+                font-size: 0.95rem;
+                border-radius: 14px;
+                /* Better mobile tapping */
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+            .secondary {
+                margin-top: 7px;
+            }
+            /* Player list */
+            .players {
+                gap: 7px;
+                margin: 12px 0;
+            }
+            .player {
+                padding: 10px 11px;
+                border-radius: 12px;
+            }
+            .player-name {
+                gap: 7px;
+                font-size: 0.9rem;
+            }
+            .dot {
+                width: 11px;
+                height: 11px;
+            }
+            .score {
+                font-size: 0.75rem;
+                padding: 3px 8px;
+            }
+            /* Game log */
+            .log {
+                max-height: 150px;
+                margin-top: 10px;
+            }
+            .log-entry {
+                padding: 8px 9px;
+                font-size: 0.78rem;
+            }
+            .safe {
+                font-size: 0.7rem;
+            }
+            /* =====================================
+       PLAYER SETUP SCREEN
+       ===================================== */
+            .setup-modal {
+                padding: 12px;
+            }
+            .setup-card {
+                max-width: 100%;
+                padding: 24px 18px;
+                border-radius: 22px;
+            }
+            .setup-icon {
+                font-size: 3rem;
+            }
+            .setup-card h2 {
+                font-size: 1.6rem;
+            }
+            .setup-card>p {
+                font-size: 0.85rem;
+                margin-bottom: 18px;
+            }
+            #playerInputs {
+                gap: 8px;
+            }
+            .name-input {
+                gap: 8px;
+            }
+            .input-number {
+                width: 36px;
+                height: 36px;
+                font-size: 0.85rem;
+            }
+            .name-input input {
+                min-height: 44px;
+                font-size: 0.95rem;
+                padding: 10px 12px;
+            }
+            .add-player {
+                min-height: 48px;
+                margin-bottom: 8px;
+            }
+            /* =====================================
+       CHALLENGE MODAL
+       ===================================== */
+            .modal {
+                padding: 12px;
+            }
+            .modal-card {
+                max-width: 100%;
+                padding: 24px 18px;
+                border-radius: 22px;
+            }
+            .modal-icon {
+                font-size: 3rem;
+            }
+            .modal h2 {
+                font-size: 1.35rem;
+            }
+            .challenge {
+                font-size: 1.05rem;
+                margin: 18px 0;
+            }
+            /* Prevent iOS zoom when typing */
+            input,
+            button {
+                font-size: 16px;
+            }
+        }
+        /* =========================================
+   📱 VERY SMALL PHONES
+   ========================================= */
+        
+        @media (max-width: 380px) {
+            .wrap {
+                padding: 6px;
+            }
+            header {
+                margin-bottom: 12px;
+            }
+            h1 {
+                font-size: 2.1rem;
+            }
+            header p {
+                font-size: 0.8rem;
+            }
+            .board-panel {
+                padding: 5px;
+            }
+            #board {
+                border-radius: 10px;
+            }
+            .cell {
+                padding: 2px;
+                font-size: 7px;
+            }
+            .cell-icon {
+                font-size: 9px;
+            }
+            .piece {
+                width: 16px;
+                height: 16px;
+                font-size: 7px;
+            }
+            .controls {
+                padding: 10px;
+            }
+            .dice {
+                font-size: 3rem;
+            }
+            button {
+                min-height: 48px;
+            }
+        }
+        /* =========================================
+   👆 MOBILE TOUCH FEEDBACK
+   ========================================= */
+        
+        @media (hover: none) {
+            button:hover {
+                transform: none;
+            }
+            button:active {
+                transform: scale(0.97);
+            }
+            .cell:hover {
+                background: inherit;
+            }
+        }
         
         .setup-modal {
             position: fixed;
