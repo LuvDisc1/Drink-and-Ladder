@@ -1605,16 +1605,11 @@
         // START GAME
         // ================================
 
-        startGameBtn.onclick = () => {
+        startGameBtn.onclick = function() {
 
-            console.log("LET'S PLAY clicked");
+            console.log("START GAME BUTTON CLICKED");
 
             const inputs = playerInputs.querySelectorAll("input");
-
-            if (inputs.length < 2) {
-                alert("You need at least 2 players!");
-                return;
-            }
 
             players = [];
 
@@ -1631,20 +1626,23 @@
 
             });
 
-            console.log("Players:", players);
+            // Safety check
+            if (players.length === 0) {
+                alert("Please add at least one player!");
+                return;
+            }
+
+            console.log("Players created:", players);
 
             current = 0;
             rolling = false;
 
+            // New board
+            generateBoard();
+
             // Reset dice
             dice.textContent = "🎲";
             dice.classList.remove("rolling", "bounce");
-
-            // Enable roll button
-            rollBtn.disabled = false;
-
-            // Generate a completely new board
-            generateBoard();
 
             // Render game
             renderBoard();
@@ -1663,10 +1661,14 @@
                 "🎮"
             );
 
-            // Hide setup AFTER everything loaded successfully
+            // Enable game
+            rollBtn.disabled = false;
+
+            // CLOSE WHO'S PLAYING
             setupModal.style.display = "none";
 
-            console.log("GAME STARTED!");
+            console.log("SETUP MODAL CLOSED");
+            console.log("GAME READY");
         };
 
 
@@ -2156,10 +2158,17 @@
         generateBoard();
         renderBoard();
 
+        // Keep player setup open when page loads
         setupModal.style.display = "grid";
+
+        // Disable game controls until players start
         rollBtn.disabled = true;
+
+        // Reset display
         turnName.textContent = "Waiting for players...";
         playersEl.innerHTML = "";
+
+        console.log("Tipsy Ladders ready!");
     </script>
 </body>
 
