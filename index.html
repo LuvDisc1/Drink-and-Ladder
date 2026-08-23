@@ -1529,21 +1529,33 @@
                 });
             });
 
-            if (players.length === 0) {
+            // Make sure we have players
+            if (players.length < 1) {
+                alert("Add at least one player!");
                 return;
             }
 
             current = 0;
+            rolling = false;
 
-            // Hide player setup
+            // Reset dice
+            dice.textContent = "🎲";
+            dice.classList.remove("rolling", "bounce");
+
+            // Enable roll button
+            document.getElementById("roll").disabled = false;
+
+            // Hide setup screen
             setupModal.style.display = "none";
 
-            // Reset the board
+            // Generate a fresh board
             generateBoard();
 
+            // Render everything
             renderBoard();
             renderPlayers();
 
+            // Clear game log
             log.innerHTML = "";
 
             addLog(
@@ -1933,7 +1945,12 @@
         }
 
         document.getElementById("roll").onclick = async() => {
+            // Don't roll before the game has started
+            if (players.length === 0) return;
+
+            // Prevent multiple rolls at once
             if (rolling) return;
+
             rolling = true;
 
             const p = players[current];
