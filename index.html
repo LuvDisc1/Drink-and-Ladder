@@ -1531,112 +1531,13 @@
         }
 
         let players = [];
-        let current = 0,
-            rolling = false;
+        let current = 0;
+        let rolling = false;
 
         const setupModal = document.getElementById("setupModal");
         const playerInputs = document.getElementById("playerInputs");
         const addPlayerBtn = document.getElementById("addPlayer");
         const startGameBtn = document.getElementById("startGame");
-
-        const playerColors = [
-            "#ff4f81",
-            "#7c5cff",
-            "#f6b73c",
-            "#35c9e8"
-        ];
-
-        let playerCount = 2;
-
-        addPlayerBtn.onclick = () => {
-            if (playerCount >= 4) {
-                addPlayerBtn.disabled = true;
-                addPlayerBtn.textContent = "MAX 4 PLAYERS";
-                return;
-            }
-
-            playerCount++;
-
-            const input = document.createElement("div");
-
-            input.className = "name-input";
-
-            input.innerHTML = `
-        <span class="input-number p${playerCount}-bg">
-            ${playerCount}
-        </span>
-
-        <input
-            type="text"
-            placeholder="Player ${playerCount}"
-            maxlength="15"
-        >
-    `;
-
-            playerInputs.appendChild(input);
-
-            if (playerCount >= 4) {
-                addPlayerBtn.disabled = true;
-                addPlayerBtn.textContent = "MAX 4 PLAYERS";
-            }
-        };
-
-
-        startGameBtn.onclick = () => {
-            const inputs = playerInputs.querySelectorAll("input");
-
-            players = [];
-
-            inputs.forEach((input, index) => {
-                const name = input.value.trim();
-
-                players.push({
-                    name: name || `Player ${index + 1}`,
-                    pos: 1,
-                    cls: `p${index + 1}`,
-                    color: playerColors[index]
-                });
-            });
-
-            // Make sure we have players
-            if (players.length < 1) {
-                alert("Add at least one player!");
-                return;
-            }
-
-            current = 0;
-            rolling = false;
-
-            // Reset dice
-            dice.textContent = "🎲";
-            dice.classList.remove("rolling", "bounce");
-
-            // Enable roll button
-            document.getElementById("roll").disabled = false;
-
-            // Hide setup screen
-            setupModal.style.display = "none";
-
-            // Generate a fresh board
-            generateBoard();
-
-            // Render everything
-            renderBoard();
-            renderPlayers();
-
-            // Clear game log
-            log.innerHTML = "";
-
-            addLog(
-                `${players.map(p => p.name).join(", ")} joined the game!`,
-                "🍻"
-            );
-
-            addLog(
-                `${players[0].name} goes first!`,
-                "🎮"
-            );
-        };
 
         const board = document.getElementById("board");
         let connectionsSvg = document.getElementById("connections");
@@ -1649,6 +1550,137 @@
         const modalTitle = document.getElementById("modalTitle");
         const modalIcon = document.getElementById("modalIcon");
         const modalSafe = document.getElementById("modalSafe");
+
+        const rollBtn = document.getElementById("roll");
+        const newGameBtn = document.getElementById("newGame");
+        const doneBtn = document.getElementById("done");
+
+        const playerColors = [
+            "#ff4f81",
+            "#7c5cff",
+            "#f6b73c",
+            "#35c9e8"
+        ];
+
+        let playerCount = 2;
+
+
+        // ================================
+        // ADD PLAYER
+        // ================================
+
+        addPlayerBtn.onclick = () => {
+
+            if (playerCount >= 4) {
+                return;
+            }
+
+            playerCount++;
+
+            const inputWrapper = document.createElement("div");
+            inputWrapper.className = "name-input";
+
+            inputWrapper.innerHTML = `
+        <span class="input-number p${playerCount}-bg">
+            ${playerCount}
+        </span>
+
+        <input
+            type="text"
+            placeholder="Player ${playerCount}"
+            maxlength="15"
+        >
+    `;
+
+            playerInputs.appendChild(inputWrapper);
+
+            if (playerCount >= 4) {
+                addPlayerBtn.disabled = true;
+                addPlayerBtn.textContent = "MAX 4 PLAYERS";
+            }
+        };
+
+
+        // ================================
+        // START GAME
+        // ================================
+
+        startGameBtn.onclick = () => {
+
+            console.log("LET'S PLAY clicked");
+
+            const inputs = playerInputs.querySelectorAll("input");
+
+            if (inputs.length < 2) {
+                alert("You need at least 2 players!");
+                return;
+            }
+
+            players = [];
+
+            inputs.forEach((input, index) => {
+
+                const name = input.value.trim();
+
+                players.push({
+                    name: name || `Player ${index + 1}`,
+                    pos: 1,
+                    cls: `p${index + 1}`,
+                    color: playerColors[index]
+                });
+
+            });
+
+            console.log("Players:", players);
+
+            current = 0;
+            rolling = false;
+
+            // Reset dice
+            dice.textContent = "🎲";
+            dice.classList.remove("rolling", "bounce");
+
+            // Enable roll button
+            rollBtn.disabled = false;
+
+            // Generate a completely new board
+            generateBoard();
+
+            // Render game
+            renderBoard();
+            renderPlayers();
+
+            // Clear log
+            log.innerHTML = "";
+
+            addLog(
+                `${players.map(p => p.name).join(", ")} joined the game!`,
+                "🍻"
+            );
+
+            addLog(
+                `${players[0].name} goes first!`,
+                "🎮"
+            );
+
+            // Hide setup AFTER everything loaded successfully
+            setupModal.style.display = "none";
+
+            console.log("GAME STARTED!");
+        };
+
+
+        // ================================
+        // INITIAL STATE
+        // ================================
+
+        setupModal.style.display = "grid";
+        rollBtn.disabled = true;
+
+        turnName.textContent = "Waiting for players...";
+        playersEl.innerHTML = "";
+
+        console.log("Tipsy Ladders initialized!");
 
         function cellNumber(i) {
             const row = Math.floor(i / 10);
@@ -2061,25 +2093,46 @@
             modal.classList.remove("show");
         };
 
-        document.getElementById("newGame").onclick = () => {
+        newGameBtn.onclick = () => {
+            rolling = false;
 
-            // Generate completely new snakes and ladders
             generateBoard();
 
-            // Reset players
             players.forEach(p => p.pos = 1);
 
             current = 0;
-            log.innerHTML = "";
-            dice.textContent = "🎲";
 
-            document.getElementById("roll").disabled = false;
+            log.innerHTML = "";
+
+            dice.textContent = "🎲";
+            dice.classList.remove("rolling", "bounce");
+
+            rollBtn.disabled = false;
 
             renderBoard();
             renderPlayers();
 
             addLog("New board generated! 🎲", "🪜");
             addLog("New game started!", "🎮");
+        };
+
+        // Generate completely new snakes and ladders
+        generateBoard();
+
+        // Reset players
+        players.forEach(p => p.pos = 1);
+
+        current = 0;
+        log.innerHTML = "";
+        dice.textContent = "🎲";
+
+        document.getElementById("roll").disabled = false;
+
+        renderBoard();
+        renderPlayers();
+
+        addLog("New board generated! 🎲", "🪜");
+        addLog("New game started!", "🎮");
         };
 
         modal.addEventListener('click', (e) => {
@@ -2102,8 +2155,11 @@
 
         generateBoard();
         renderBoard();
-        renderPlayers();
-        addLog("Game started! Press SPACE to roll.", "🎮");
+
+        setupModal.style.display = "grid";
+        rollBtn.disabled = true;
+        turnName.textContent = "Waiting for players...";
+        playersEl.innerHTML = "";
     </script>
 </body>
 
