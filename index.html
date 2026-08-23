@@ -1614,12 +1614,7 @@
                 path.setAttribute('opacity', '0.6');
                 path.setAttribute('id', pathId);
 
-                const animate = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-                animate.setAttribute('attributeName', 'stroke-dasharray');
-                animate.setAttribute('values', '8 4;12 4;8 4');
-                animate.setAttribute('dur', '2s');
-                animate.setAttribute('repeatCount', 'indefinite');
-                path.appendChild(animate);
+                path.setAttribute('stroke-dasharray', '8 4');
 
                 connectionsSvg.appendChild(path);
 
@@ -1666,12 +1661,7 @@
                 path.setAttribute('opacity', '0.6');
                 path.setAttribute('id', pathId);
 
-                const animate = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-                animate.setAttribute('attributeName', 'stroke-dasharray');
-                animate.setAttribute('values', '6 3;10 3;6 3');
-                animate.setAttribute('dur', '1.5s');
-                animate.setAttribute('repeatCount', 'indefinite');
-                path.appendChild(animate);
+                path.setAttribute('stroke-dasharray', '6 3');
 
                 connectionsSvg.appendChild(path);
 
