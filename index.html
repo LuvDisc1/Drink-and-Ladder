@@ -334,9 +334,17 @@
             content: '';
             position: absolute;
             inset: -50%;
-            background: conic-gradient(from 0deg, transparent, var(--accent), transparent 30%);
+            background: conic-gradient( from 0deg, transparent, var(--accent), transparent 30%);
             animation: turnGlow 3s linear infinite;
             opacity: 0.3;
+            /* IMPORTANT */
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .turn>* {
+            position: relative;
+            z-index: 1;
         }
         
         @keyframes turnGlow {
@@ -1289,30 +1297,63 @@
     <script>
         const challenges = [
             // 🍺 DRINK / SIMPLE
-            "Take 1 sip 🍺",
+            "Take 1 sip 🍻",
             "Take 2 sips 🍻",
-            "Give 1 sip to another player 🎁",
-            "Give 2 sips to another player 🎁",
-            "Everyone takes 1 sip 🍻",
-            "Choose someone to take 1 sip 👉",
-            "Take 1 sip or do 5 jumping jacks 🏃",
-            "Truth or sip 🤔",
+            "Take 3 sips 🍻",
+            "Take 1 sip and compliment the person to your left 💕",
+            "Take 1 sip and compliment the person to your right 😎",
+            "Take 1 sip if you have checked your phone in the last 5 minutes 📱",
+            "Take 1 sip if you're currently single 👀",
+            "Take 2 sips if you're currently in a relationship 👀",
+            "Take 1 sip if you've ever pretended to understand something 🤨",
+            "Take 1 sip if you've ever fallen asleep during a movie 🎬",
+            "Take 1 sip if you've ever been late because you were still getting ready ⏰",
+            "Take 1 sip if you've ever had a crush on someone in this room 👀",
+            "Take 1 sip if you have more than 10 unread messages 📱",
+            "Take 1 sip if you've ever danced when nobody was watching 💃",
+            "Roll the dice. If you roll 1–3, choose someone to take 1 sip. If 4–6, choose someone to do a challenge 🎲",
+
+            // 🎁 GIVE / CHOOSE
+            "Choose someone to take 1 sip with you 🍻",
+            "Choose someone to take 2 sips 🍻",
+            "Give 1 sip to the player on your left 👉",
+            "Give 1 sip to the player on your right 👉",
+            "Choose any player to take 1 sip 🎯",
+            "Choose two players to each take 1 sip 👥",
+            "Everyone takes 1 sip except you 😎",
+            "Everyone takes 1 sip, including you 🍻",
+            "Everyone wearing black takes 1 sip 🖤",
+            "Everyone wearing white takes 1 sip 🤍",
+            "Everyone who has a phone in their hand takes 1 sip 📱",
+            "Everyone who arrived late takes 1 sip ⏰",
+            "Everyone who is currently sitting down takes 1 sip 🪑",
+            "Everyone with siblings takes 1 sip 👨‍👩‍👧",
+            "Everyone who has traveled this year takes 1 sip ✈️",
+
+            // 😂 DRINK OR DO
+            "Take 1 sip or do your best dance move 💃",
+            "Take 1 sip or sing the chorus of a song 🎤",
+            "Take 1 sip or make the group laugh in 10 seconds 😂",
+            "Take 1 sip or speak in an accent for one round 🗣️",
+            "Take 1 sip or let another player choose your next challenge 😈",
+            "Take 1 sip or do 5 harmless jumping jacks 🏃",
+            "Take 1 sip or tell the group your most useless talent 😂",
+            "Take 1 sip or make up a ridiculous story about yourself 🤥",
+            "Take 1 sip or tell an embarrassing story 😂",
 
             // 😂 FUNNY
-            "Tell a funny story or take 2 sips 😂",
-            "Do your best celebrity impression 🎤",
+            "Tell a funny story 😂",
             "Make the weirdest face you can for 5 seconds 😭",
             "Do your best evil villain laugh 😈",
             "Act like a chicken for 10 seconds 🐔",
             "Tell the worst joke you know 😂",
             "Give a dramatic Oscar speech thanking everyone at the table 🏆",
-            "Do a 5-second dance with absolutely no music 💃",
             "Describe your life as if it were a movie trailer 🎬",
             "Give a completely unnecessary motivational speech 🎤",
             "Try to make another player laugh without touching them 😂",
 
             // 🎭 ACTING
-            "Speak like a robot for 1 round🤖",
+            "Speak like a robot for 1 round 🤖",
             "Do your best news reporter impression 📺",
             "Act out your favorite movie without speaking 🎬",
             "Pretend you are a famous singer performing your biggest hit 🎤",
@@ -1353,7 +1394,6 @@
             "Everyone points at the player most likely to survive a zombie apocalypse 🧟",
             "Everyone points at the player most likely to become famous ⭐",
             "Everyone points at the player most likely to get lost on vacation 🗺️",
-            "Everyone raises their glass. Last person to raise theirs takes 1 sip 🥂",
             "Everyone touches the table. Last person takes 1 sip 👆",
             "Everyone tries to stay completely silent for 10 seconds 🤫",
             "Last person to laugh takes 1 sip 😂",
@@ -1366,10 +1406,9 @@
             "Pick another player to roll against you. Higher roll wins 🏆",
             "Everyone guesses your roll before you roll. Anyone who guesses correctly gets immunity from this challenge 🎲",
 
-            // 😈 CHAOTIC BUT ONE-TIME
+            // 😈 CHAOTIC
             "Give a 10-second acceptance speech for winning absolutely nothing 🏆",
             "Tell everyone your most useless talent 😂",
-            "Show your best dance move for 5 seconds 💃",
             "Do your best impression of someone at the table 👀",
             "Say a tongue twister three times quickly 👅",
             "Try to say your full name backwards 😭",
@@ -1388,7 +1427,7 @@
             "Pick someone to do a harmless challenge with you 🤝",
             "You are safe! Celebrate dramatically 🎉",
 
-            // GO AROUND TOPICS
+            // 🔄 GO AROUND TOPICS
             "🚗 GO AROUND CLOCKWISE — Name a CAR BRAND",
             "🍔 GO AROUND CLOCKWISE — Name a FAST FOOD CHAIN",
             "🎬 GO AROUND CLOCKWISE — Name a MOVIE",
@@ -1417,6 +1456,36 @@
             "💅 GO AROUND CLOCKWISE — Name a CELEBRITY",
             "🏪 GO AROUND CLOCKWISE — Name a STORE",
             "💰 GO AROUND CLOCKWISE — Name a WAY TO MAKE MONEY",
+
+            // 🧩 THINKING
+            "🕵️ CONSPIRACY BATTLE — Prove that the MOON LANDING was FAKE. Everyone else must counter-argue you. If the group defeats your argument, take 2 sips. If you convince everyone, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that ALIENS HAVE ALREADY VISITED EARTH. Everyone else must counter-argue you. If you lose the debate, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that BIRDS ARE SECRETLY GOVERNMENT SPIES. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that THE EARTH IS FLAT. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that THE MOON IS ACTUALLY A GIANT SPACE STATION. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that TIME TRAVELERS ARE LIVING AMONG US. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that YOUR PHONE IS LISTENING TO EVERYTHING YOU SAY. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that DEJA VU IS PROOF OF PREVIOUS LIVES. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that DREAMS ARE MEMORIES FROM PARALLEL UNIVERSES. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🕵️ CONSPIRACY BATTLE — Prove that THE INTERNET WAS INVENTED BY TIME TRAVELERS. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+
+            "🔥 DEBATE BATTLE — Prove that PINEAPPLE BELONGS ON PIZZA. Everyone else must counter-argue you. If you lose the debate, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🔥 DEBATE BATTLE — Prove that CEREAL SHOULD BE EATEN WITH WATER INSTEAD OF MILK. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🔥 DEBATE BATTLE — Prove that SLEEPING IS A WASTE OF TIME. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🔥 DEBATE BATTLE — Prove that MONEY CAN BUY HAPPINESS. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🔥 DEBATE BATTLE — Prove that SOCIAL MEDIA HAS MADE PEOPLE BETTER. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🔥 DEBATE BATTLE — Prove that ANIMALS WOULD MAKE BETTER PRESIDENTS THAN HUMANS. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🔥 DEBATE BATTLE — Prove that EVERYONE SHOULD HAVE A FOUR-DAY WEEKEND. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+            "🔥 DEBATE BATTLE — Prove that PINEAPPLE IS THE BEST PIZZA TOPPING. Everyone else must counter-argue you. If you lose, take 2 sips. If you win, choose someone to take 2 sips.",
+
+            "💀 UNHINGED DEBATE — Prove that THE SUN IS JUST A GIANT LIGHT BULB. Everyone else must counter-argue you. You have 30 seconds to convince them. If you lose, take 2 sips.",
+            "💀 UNHINGED DEBATE — Prove that CATS ARE SECRETLY JUDGING HUMANS. Everyone else must counter-argue you. You have 30 seconds to convince them. If you lose, take 2 sips.",
+            "💀 UNHINGED DEBATE — Prove that THE GROUP'S WORST PLAYER IS ACTUALLY THE MAIN CHARACTER. Everyone else must counter-argue you. If you lose, take 2 sips.",
+            "💀 UNHINGED DEBATE — Prove that SOCKS DISAPPEAR IN THE WASH BECAUSE THEY ESCAPE. Everyone else must counter-argue you. If you lose, take 2 sips.",
+            "💀 UNHINGED DEBATE — Prove that WATER TASTES DIFFERENT DEPENDING ON THE DAY OF THE WEEK. Everyone else must counter-argue you. If you lose, take 2 sips.",
+            "💀 UNHINGED DEBATE — Prove that YOUR REFLECTION IS ACTUALLY A DIFFERENT PERSON. Everyone else must counter-argue you. If you lose, take 2 sips.",
+            "💀 UNHINGED DEBATE — Prove that PIGEONS KNOW MORE THAN THEY LET ON. Everyone else must counter-argue you. If you lose, take 2 sips.",
+            "💀 UNHINGED DEBATE — Prove that THE GROUP IS CURRENTLY BEING WATCHED BY SOMEONE. Everyone else must counter-argue you. If you lose, take 2 sips.",
         ];
 
         let ladders = {};
@@ -1974,7 +2043,7 @@
             if (p.pos + roll <= 100) {
                 await movePlayer(p, roll);
             } else {
-                showChallenge("Almost there!", "You need an exact roll to reach tile 100.", "🚫");
+                showChallenge("Almost there!", "You need an exact roll to reach tile 100.", "Take 1 sip", "🚫");
             }
 
             if (p.pos === 100) {
