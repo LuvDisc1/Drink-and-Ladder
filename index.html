@@ -2118,25 +2118,6 @@
             addLog("New game started!", "🎮");
         };
 
-        // Generate completely new snakes and ladders
-        generateBoard();
-
-        // Reset players
-        players.forEach(p => p.pos = 1);
-
-        current = 0;
-        log.innerHTML = "";
-        dice.textContent = "🎲";
-
-        document.getElementById("roll").disabled = false;
-
-        renderBoard();
-        renderPlayers();
-
-        addLog("New board generated! 🎲", "🪜");
-        addLog("New game started!", "🎮");
-        };
-
         modal.addEventListener('click', (e) => {
             if (e.target === modal) modal.classList.remove("show");
         });
