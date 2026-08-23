@@ -1514,13 +1514,11 @@
 
 
         startGameBtn.onclick = () => {
-
             const inputs = playerInputs.querySelectorAll("input");
 
             players = [];
 
             inputs.forEach((input, index) => {
-
                 const name = input.value.trim();
 
                 players.push({
@@ -1529,12 +1527,19 @@
                     cls: `p${index + 1}`,
                     color: playerColors[index]
                 });
-
             });
+
+            if (players.length === 0) {
+                return;
+            }
 
             current = 0;
 
+            // Hide player setup
             setupModal.style.display = "none";
+
+            // Reset the board
+            generateBoard();
 
             renderBoard();
             renderPlayers();
@@ -1756,15 +1761,23 @@
         }
 
         function renderPlayers() {
+            // Don't try to render players before the game has started
+            if (players.length === 0) {
+                playersEl.innerHTML = "";
+                turnName.textContent = "Waiting for players...";
+                return;
+            }
+
             playersEl.innerHTML = players.map((p, i) => `
-    <div class="player ${i === current ? "active" : ""}">
-      <span class="player-name">
-        <i class="dot ${p.cls}" style="color:${p.color}"></i>
-        ${p.name}
-      </span>
-      <span class="score">Tile ${p.pos}</span>
-    </div>
-  `).join("");
+        <div class="player ${i === current ? "active" : ""}">
+            <span class="player-name">
+                <i class="dot ${p.cls}" style="color:${p.color}"></i>
+                ${p.name}
+            </span>
+            <span class="score">Tile ${p.pos}</span>
+        </div>
+    `).join("");
+
             turnName.textContent = players[current].name;
         }
 
