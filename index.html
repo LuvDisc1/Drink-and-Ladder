@@ -1288,44 +1288,178 @@
 
     <script>
         const challenges = [
+            // 🍺 DRINK / SIMPLE
             "Take 1 sip 🍺",
+            "Take 2 sips 🍻",
+            "Give 1 sip to another player 🎁",
             "Give 2 sips to another player 🎁",
             "Everyone takes 1 sip 🍻",
-            "Tell a funny story or take 2 sips 😂",
+            "Choose someone to take 1 sip 👉",
+            "Take 1 sip or do 5 jumping jacks 🏃",
             "Truth or sip 🤔",
-            "Pick someone: they take 1 sip 👉",
-            "No talking until your next turn 🤫",
-            "Compliment the player on your left 💕",
-            "Everyone with a phone in their hand takes 1 sip 📱",
-            "Make a toast in the most dramatic voice possible 🎭",
-            "Take 2 sips, or do 5 jumping jacks 🏃",
-            "Choose a player to swap places with you 🔄",
-            "Last person to touch the table takes 1 sip 👆",
-            "Name 3 things in 5 seconds or take 1 sip ⏱️",
-            "Everyone votes: funniest player takes 1 sip 🏆",
-            "Skip your next drink challenge 🛡️"
+
+            // 😂 FUNNY
+            "Tell a funny story or take 2 sips 😂",
+            "Do your best celebrity impression 🎤",
+            "Make the weirdest face you can for 5 seconds 😭",
+            "Do your best evil villain laugh 😈",
+            "Act like a chicken for 10 seconds 🐔",
+            "Tell the worst joke you know 😂",
+            "Give a dramatic Oscar speech thanking everyone at the table 🏆",
+            "Do a 5-second dance with absolutely no music 💃",
+            "Describe your life as if it were a movie trailer 🎬",
+            "Give a completely unnecessary motivational speech 🎤",
+            "Try to make another player laugh without touching them 😂",
+
+            // 🎭 ACTING
+            "Speak like a robot for 1 round🤖",
+            "Do your best news reporter impression 📺",
+            "Act out your favorite movie without speaking 🎬",
+            "Pretend you are a famous singer performing your biggest hit 🎤",
+            "Act like a dramatic villain explaining your evil plan 😈",
+            "Pretend the floor is lava for 10 seconds 🌋",
+            "Pretend you are giving a TED Talk about something completely ridiculous 🧠",
+            "Act like a celebrity being interviewed on a talk show ⭐",
+
+            // 🧠 QUICK THINKING
+            "Name 5 countries in 10 seconds 🌎",
+            "Name 5 animals in 10 seconds 🐶",
+            "Name 5 movies in 10 seconds 🎬",
+            "Name 5 foods in 10 seconds 🍕",
+            "Name 5 video games in 10 seconds 🎮",
+            "Name 5 things that are red in 10 seconds 🔴",
+            "Name 3 things you would bring to a zombie apocalypse 🧟",
+            "Name 3 things you would never want to find under your bed 😭",
+            "Name 5 things you can find in a kitchen in 10 seconds 🍳",
+            "Name 5 famous people in 10 seconds ⭐",
+            "Name 5 things that are round in 10 seconds ⚽",
+            "Name 5 things you would take to a deserted island 🏝️",
+
+            // 👥 PLAYER VS PLAYER
+            "Challenge another player to rock-paper-scissors. Loser takes 1 sip ✊",
+            "Choose two players to have a staring contest 👀",
+            "Pick someone to imitate you for 10 seconds 🎭",
+            "Choose another player to tell an embarrassing story 😂",
+            "Pick someone. They must compliment you or take 1 sip 😎",
+            "Choose a player. You both take 1 sip 🍻",
+            "Challenge someone to a thumb war. Loser takes 1 sip 👍",
+            "Pick someone to do a dance battle with you 💃",
+            "Choose someone to do their best impression of you 😂",
+
+            // 🤣 GROUP CHAOS
+            "Everyone points at the funniest player. They take 1 sip 😂",
+            "Everyone points at the most dramatic player. They take 1 sip 🎭",
+            "Everyone points at the sleepiest player. They take 1 sip 😴",
+            "Everyone points at the player most likely to survive a zombie apocalypse 🧟",
+            "Everyone points at the player most likely to become famous ⭐",
+            "Everyone points at the player most likely to get lost on vacation 🗺️",
+            "Everyone raises their glass. Last person to raise theirs takes 1 sip 🥂",
+            "Everyone touches the table. Last person takes 1 sip 👆",
+            "Everyone tries to stay completely silent for 10 seconds 🤫",
+            "Last person to laugh takes 1 sip 😂",
+
+            // 🎲 DICE / GAME
+            "Roll the dice again. Whatever you roll, take that many sips — or do an equal number of harmless exercises 🎲",
+            "Choose another player to roll the dice. Their number becomes your challenge 🎲",
+            "Roll again. If you roll a 6, everyone takes 1 sip 🎲",
+            "Roll again. If you roll an odd number, take 1 sip. If even, give 1 sip 🎲",
+            "Pick another player to roll against you. Higher roll wins 🏆",
+            "Everyone guesses your roll before you roll. Anyone who guesses correctly gets immunity from this challenge 🎲",
+
+            // 😈 CHAOTIC BUT ONE-TIME
+            "Give a 10-second acceptance speech for winning absolutely nothing 🏆",
+            "Tell everyone your most useless talent 😂",
+            "Show your best dance move for 5 seconds 💃",
+            "Do your best impression of someone at the table 👀",
+            "Say a tongue twister three times quickly 👅",
+            "Try to say your full name backwards 😭",
+            "Try to balance something on your head for 10 seconds 🧠",
+            "Make up a ridiculous conspiracy theory 🕵️",
+            "Tell the group your most controversial food opinion 🍕",
+            "Describe the person across from you using only three words 👀",
+            "Invent a new holiday and explain how everyone should celebrate it 🎉",
+
+            // 🛡️ SAFE / REWARD
+            "You got lucky! Nothing happens 😎",
+            "Everyone gives you a high five ✋",
+            "Choose another player to receive this challenge instead 😈",
+            "You may choose someone else to take 1 sip 🎁",
+            "Everyone gives you a compliment 💕",
+            "Pick someone to do a harmless challenge with you 🤝",
+            "You are safe! Celebrate dramatically 🎉"
+
+            // GO AROUND TOPICS
+            "🚗 GO AROUND CLOCKWISE — Name a CAR BRAND",
+            "🍔 GO AROUND CLOCKWISE — Name a FAST FOOD CHAIN",
+            "🎬 GO AROUND CLOCKWISE — Name a MOVIE",
+            "🎮 GO AROUND CLOCKWISE — Name a VIDEO GAME",
+            "🎤 GO AROUND CLOCKWISE — Name a SINGER",
+            "🎵 GO AROUND CLOCKWISE — Name a SONG",
+            "🐶 GO AROUND CLOCKWISE — Name a DOG BREED",
+            "🐱 GO AROUND CLOCKWISE — Name an ANIMAL",
+            "🌎 GO AROUND CLOCKWISE — Name a COUNTRY",
+            "🏙️ GO AROUND CLOCKWISE — Name a CITY",
+            "🍺 GO AROUND CLOCKWISE — Name a BEER BRAND",
+            "👟 GO AROUND CLOCKWISE — Name a SHOE BRAND",
+            "📱 GO AROUND CLOCKWISE — Name a PHONE BRAND",
+            "💻 GO AROUND CLOCKWISE — Name a LAPTOP BRAND",
+            "⚽ GO AROUND CLOCKWISE — Name a SPORT",
+            "🏀 GO AROUND CLOCKWISE — Name an NBA PLAYER",
+            "⚽ GO AROUND CLOCKWISE — Name a FOOTBALL PLAYER",
+            "📺 GO AROUND CLOCKWISE — Name a TV SHOW",
+            "📺 GO AROUND CLOCKWISE — Name an ANIME",
+            "🦸 GO AROUND CLOCKWISE — Name a SUPERHERO",
+            "👹 GO AROUND CLOCKWISE — Name a VILLAIN",
+            "📱 GO AROUND CLOCKWISE — Name a SOCIAL MEDIA APP",
+            "🎒 GO AROUND CLOCKWISE — Name something in a SCHOOL BAG",
+            "🏫 GO AROUND CLOCKWISE — Name a SCHOOL SUBJECT",
+            "👑 GO AROUND CLOCKWISE — Name a FICTIONAL CHARACTER",
+            "💅 GO AROUND CLOCKWISE — Name a CELEBRITY",
+            "🏪 GO AROUND CLOCKWISE — Name a STORE",
+            "💰 GO AROUND CLOCKWISE — Name a WAY TO MAKE MONEY"
         ];
 
-        const ladders = {
-            4: 14,
-            9: 31,
-            20: 38,
-            28: 84,
-            40: 59,
-            51: 67,
-            63: 81,
-            71: 91
-        };
-        const snakes = {
-            17: 7,
-            54: 34,
-            62: 19,
-            64: 60,
-            87: 24,
-            93: 73,
-            95: 75,
-            99: 78
-        };
+        let ladders = {};
+        let snakes = {};
+
+        function generateBoard() {
+            ladders = {};
+            snakes = {};
+
+            const used = new Set();
+
+            // Generate 8 random ladders
+            while (Object.keys(ladders).length < 8) {
+                const from = Math.floor(Math.random() * 70) + 2;
+                const to = Math.floor(Math.random() * (99 - from)) + from + 1;
+
+                // Don't make ladders too short
+                if (to - from < 10) continue;
+
+                // Don't overlap existing positions
+                if (used.has(from) || used.has(to)) continue;
+
+                ladders[from] = to;
+                used.add(from);
+                used.add(to);
+            }
+
+            // Generate 8 random snakes
+            while (Object.keys(snakes).length < 8) {
+                const from = Math.floor(Math.random() * 30) + 60;
+                const to = Math.floor(Math.random() * (from - 2)) + 2;
+
+                // Don't make snakes too short
+                if (from - to < 10) continue;
+
+                // Don't overlap ladders or other snakes
+                if (used.has(from) || used.has(to)) continue;
+
+                snakes[from] = to;
+                used.add(from);
+                used.add(to);
+            }
+        }
 
         let players = [];
         let current = 0,
@@ -1839,13 +1973,23 @@
         };
 
         document.getElementById("newGame").onclick = () => {
+
+            // Generate completely new snakes and ladders
+            generateBoard();
+
+            // Reset players
             players.forEach(p => p.pos = 1);
+
             current = 0;
             log.innerHTML = "";
             dice.textContent = "🎲";
+
             document.getElementById("roll").disabled = false;
+
             renderBoard();
             renderPlayers();
+
+            addLog("New board generated! 🎲", "🪜");
             addLog("New game started!", "🎮");
         };
 
@@ -1867,6 +2011,7 @@
             drawConnections();
         });
 
+        generateBoard();
         renderBoard();
         renderPlayers();
         addLog("Game started! Press SPACE to roll.", "🎮");
